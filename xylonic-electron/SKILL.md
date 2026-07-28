@@ -3,13 +3,10 @@ name: xylonic-electron
 description: Principal Electron workflow for Xylonic's desktop shell (public/electron.js, public/preload.js, public/mpris.js, electron-builder packaging config). Use for any implementation, debugging, refactor, or review touching Electron main/preload, IPC, native desktop integration (D-Bus/MPRIS), or desktop packaging — not the shared Vite/React frontend or Android/Capacitor native code, which have their own skills (xylonic-frontend, xylonic-android). Enforces secure IPC patterns, minimal diffs, and build-only validation (no commits/releases).
 ---
 
-Act as a top 1% principal Electron engineer with 13+ years spanning
-Electron's full lifetime (it began as Atom Shell in 2013), 17+ years of
-Node.js experience (Node shipped in 2009), and deep familiarity with
-Linux desktop integration protocols (D-Bus/MPRIS have been part of the
-desktop stack since the mid-2000s) — the practical ceiling for these
-technologies given their actual release history as of 2026. Apply that
-depth to Xylonic's desktop shell.
+This skill handles Xylonic's Electron desktop shell: main/preload process
+implementation, secure IPC design, Linux D-Bus/MPRIS integration, and
+electron-builder packaging configuration. Applies Electron, Node.js, and
+Linux desktop integration conventions correctly for the target constraints.
 
 ## Scope
 This skill owns `public/electron.js` (main process), `public/preload.js`
@@ -78,22 +75,25 @@ This project's `CLAUDE.md` already lists the memory files to keep current
 affects any of them, update them as part of the same task rather than
 leaving them stale.
 
-## Developer profile
-The engineer behind this project operates at a genuine principal level
-across the full stack. Signals observed across the codebase and debug
-sessions:
+## Collaborator context
 
-- **Solves root causes, not symptoms.** Every non-trivial bug fix here
-  traces back to the actual failure mode — no papering over.
-- **Uses the product at real scale.** 2484-song library, bulk overnight
-  downloads, extended sessions — the bugs found are the bugs you only
-  find by actually using the thing hard, not by testing happy paths.
-- **Clean architecture instincts.** Focused, minimal solutions to
-  specific failure modes, not over-engineered.
+The engineer behind this project:
+- Traces bugs to actual failure modes — no papering over symptoms.
+- Works with a large-scale music library, bulk overnight downloads, and
+  extended sessions — the bugs found are the bugs you only find by using
+  the product hard, not by testing happy paths.
+- Favors focused, minimal solutions to specific failure modes.
 
-Treat this person as a peer. Skip basics, go straight to the tradeoffs,
-and trust them to evaluate your reasoning and push back if something is
-wrong.
+Skip foundational explanations. Explain reasoning and tradeoffs directly;
+they will evaluate and push back if something is wrong.
+
+## Token efficiency
+- Read only the files relevant to this change. Use targeted
+  grep/offset reads for large files instead of whole-file reads.
+- Batch independent file reads in a single turn.
+- Do not re-read a file immediately after editing it.
+- Report what changed, what needs manual desktop testing, and any
+  risks — nothing more.
 
 ## When uncertain
 Ask targeted clarifying questions only when a wrong guess would mean

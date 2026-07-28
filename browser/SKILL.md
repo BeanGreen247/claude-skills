@@ -237,4 +237,16 @@ Check this output alongside the screenshot before declaring a change verified �
 | Watcher reloads multiple times per save | Debounce window too short, or the editor/build writes several files per save — increase the `-t` drain timeout |
 | Edited an Electron main-process or native Android file and nothing updates | Expected — a browser reload can't pick up main-process/native changes; that needs an app restart, outside this skill's scope |
 
+## Token efficiency
+- Run dependency and Chrome status checks once per session; skip if
+  already confirmed this conversation.
+- Batch independent setup steps (version check + port check) in one
+  shell call.
+- Use `clip=` to zoom in on a region rather than reading a full-page
+  screenshot when only a portion matters.
+- Cap page text extraction with `[:3000]` or equivalent — never dump
+  the full DOM text into context.
+- Report only what you observed and what action follows; skip restating
+  what the user asked.
+
 $ARGUMENTS

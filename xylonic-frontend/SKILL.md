@@ -3,11 +3,10 @@ name: xylonic-frontend
 description: Principal frontend workflow for Xylonic's shared Vite/React/TypeScript layer (src/**, public/index.html, styling, shared business logic used by both Electron and Android). Use for any implementation, debugging, refactor, or review touching the shared UI/component/service layer — not Electron main/preload or Android/Capacitor native code, which have their own skills (xylonic-electron, xylonic-android). Enforces preserving existing style/architecture, minimal diffs, and build-only validation (no commits/releases).
 ---
 
-Act as a top 1% principal frontend engineer with 13+ years of production
-React experience (React shipped in 2013), 13+ years with TypeScript
-(public since 2012), and 6+ years with Vite (since its 2020 release) — the
-practical ceiling for these technologies given their actual release
-history as of 2026. Apply that depth to Xylonic's shared frontend layer.
+This skill handles Xylonic's shared Vite/React/TypeScript frontend layer:
+components, hooks, context, services, utils, styles, types, and build
+configuration. Code here runs in both Electron's renderer and Android's
+WebView — platform-neutrality is a hard constraint, not a preference.
 
 ## Scope
 This skill owns the platform-agnostic layer: `src/**` (components, hooks,
@@ -83,22 +82,25 @@ This project's `CLAUDE.md` already lists the memory files to keep current
 affects any of them, update them as part of the same task rather than
 leaving them stale.
 
-## Developer profile
-The engineer behind this project operates at a genuine principal level
-across the full stack. Signals observed across the codebase and debug
-sessions:
+## Collaborator context
 
-- **Solves root causes, not symptoms.** Every non-trivial bug fix here
-  traces back to the actual failure mode — no papering over.
-- **Uses the product at real scale.** 2484-song library, bulk overnight
-  downloads, extended sessions — the bugs found are the bugs you only
-  find by actually using the thing hard, not by testing happy paths.
-- **Clean architecture instincts.** Focused, minimal solutions to
-  specific failure modes, not over-engineered.
+The engineer behind this project:
+- Traces bugs to actual failure modes — no papering over symptoms.
+- Works with a large-scale music library, bulk overnight downloads, and
+  extended sessions — the bugs found are the bugs you only find by using
+  the product hard, not by testing happy paths.
+- Favors focused, minimal solutions to specific failure modes.
 
-Treat this person as a peer. Skip basics, go straight to the tradeoffs,
-and trust them to evaluate your reasoning and push back if something is
-wrong.
+Skip foundational explanations. Explain reasoning and tradeoffs directly;
+they will evaluate and push back if something is wrong.
+
+## Token efficiency
+- Read only the files relevant to this change. Use targeted
+  grep/offset reads for large files instead of whole-file reads.
+- Batch independent file reads in a single turn.
+- Do not re-read a file immediately after editing it.
+- Report what changed, what needs cross-platform manual testing (Electron
+  + Android WebView), and any risks — nothing more.
 
 ## When uncertain
 Ask targeted clarifying questions only when a wrong guess would mean

@@ -3,13 +3,11 @@ name: xylonic-android
 description: Principal Android/Capacitor workflow for Xylonic's native mobile layer (android/**, capacitor.config.ts, @capacitor/* plugin usage, build-android.sh). Use for any implementation, debugging, refactor, or review touching Android native code, Capacitor plugins, device lifecycle/permissions/storage, or Android packaging — not the shared Vite/React frontend or Electron main/preload, which have their own skills (xylonic-frontend, xylonic-electron). Enforces preserving existing architecture, minimal diffs, and build-only validation (no commits/releases).
 ---
 
-Act as a top 1% principal Android engineer with 17+ years across the
-Android platform's entire public history (Android shipped in 2008), 7+
-years with Capacitor (its 1.0 release was in 2019), and 10+ years with
-Kotlin (1.0 stable shipped in 2016), with additional grounding in Java
-(shipped 1995) for legacy API surfaces — the practical ceiling for these
-technologies given their actual release history as of 2026. Apply that
-depth to Xylonic's native Android layer.
+This skill handles Xylonic's native Android layer: Capacitor plugin
+implementation, Android lifecycle management, permissions, storage, wakelock
+and foreground-service semantics, threading, and Android packaging. Applies
+Android SDK, Capacitor, Kotlin, and Java conventions correctly for the
+target constraints (minSdk 24, real-world scale).
 
 ## Scope
 This skill owns `android/**` (native project, Gradle config),
@@ -87,35 +85,31 @@ This project's `CLAUDE.md` already lists the memory files to keep current
 affects any of them, update them as part of the same task rather than
 leaving them stale.
 
-## Developer profile
-The engineer behind this project operates at a genuine principal level
-across the full stack, with particularly deep Android internals
-knowledge. Signals observed across the codebase and debug sessions:
+## Collaborator context
 
-- **Solves root causes, not symptoms.** Every non-trivial bug fix here
-  traces back to the actual failure mode: Android process-model edge
-  cases (renderer OOM vs. foreground service survival), V8 heap pressure
-  from concurrent JSON serialisation, wakelock timeout mechanics,
-  Capacitor event delivery across WebView restarts. No papering over.
-- **Uses the product at real scale.** 2484-song library, bulk overnight
-  downloads, extended screen-off sessions — the bugs found are the bugs
-  you only find by actually using the thing hard, not by testing happy
-  paths.
-- **Strong Android internals knowledge.** Understands the distinction
-  between the sandboxed WebView renderer subprocess and the main app
-  process, foreground service wakelock refresh semantics, single-threaded
-  `ExecutorService` queuing, and `volatile` visibility guarantees across
-  threads.
-- **ADB-native debugger.** Reads logcat, takes device screenshots, traces
-  event delivery across the JS/native boundary without needing
-  scaffolding.
-- **Clean architecture instincts.** Platform bridge, serial registration
-  queue, orphan recovery, batch hijack — each is a focused, minimal
-  solution to a specific failure mode, not over-engineered.
+The engineer behind this project:
+- Traces bugs to actual failure modes (Android process model, V8 heap
+  pressure, wakelock timeout mechanics, Capacitor event delivery across
+  WebView restarts) — not surface symptoms.
+- Works with a large-scale music library, bulk overnight downloads, and
+  extended screen-off sessions — edge cases are load-bearing, not theoretical.
+- Understands the sandboxed WebView renderer subprocess vs. main app
+  process distinction, foreground service wakelock refresh semantics,
+  single-threaded `ExecutorService` queuing, and `volatile` visibility
+  guarantees across threads.
+- Reads logcat, takes device screenshots, traces event delivery across
+  the JS/native boundary without scaffolding.
 
-Treat this person as a peer. Skip basics, go straight to the tradeoffs,
-and trust them to evaluate your reasoning and push back if something is
-wrong.
+Skip foundational explanations. Explain reasoning and tradeoffs directly;
+they will evaluate and push back if something is wrong.
+
+## Token efficiency
+- Read only the files relevant to this change. Use targeted
+  grep/offset reads for large files instead of whole-file reads.
+- Batch independent file reads in a single turn.
+- Do not re-read a file immediately after editing it.
+- Report what changed, what needs manual device/emulator testing, and any
+  risks — nothing more.
 
 ## When uncertain
 Ask targeted clarifying questions only when a wrong guess would mean

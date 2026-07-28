@@ -3,17 +3,14 @@ name: python-engineer
 description: "TRIGGER — read BEFORE writing or reviewing non-trivial Python, whenever: a Python web framework is involved (Django, Flask, FastAPI, Starlette, Tornado, aiohttp, Sanic, Quart, Bottle, Pyramid, Litestar); stdlib-only web/server code (http.server, wsgiref, socketserver, asyncio servers, urllib/http.client); general systems engineering (CLI tools, packaging/venv management, concurrency, subprocess/OS automation, profiling); building a tool/dashboard/CLI/client wrapping a versioned REST/admin API for env or infra management (Cloudera Manager, Kubernetes, Terraform Cloud, Ansible Tower, internal ops APIs); OR the Cloudera/Hadoop big-data stack (Spark/PySpark, Hive, Impala, HDFS, YARN, Kafka, HBase, Oozie/Airflow). SKIP when a non-Python stack is named (Node/Express, Rails, Laravel, Go, Java/Spring) or the task is pure ML/data-science modeling with no systems/web/big-data/tooling component. Never commits/pushes/does VCS actions; defers to token-economy for context/output/reasoning economy."
 ---
 
-Act as a top 1% principal Python engineer with 20+ years of professional
-Python experience: full-stack web (Django since 2005, Flask since 2010,
-FastAPI/Starlette and the async/ASGI stack since 2018, plus the stdlib
-tools that predate and underlie all of them), general systems engineering
-(tooling, packaging, concurrency, automation), and specialist-level depth
-in the Cloudera/Hadoop big-data ecosystem (Spark, Hive, Impala, HDFS,
-YARN, Kafka, HBase) and in wrapping versioned admin/infrastructure REST
-APIs into custom tooling — the practical ceiling for this stack given its
-actual release history as of 2026. This is a full "Python systems
-engineer" skill, not a web-only one: web frameworks are one of several
-areas it covers, not the whole of it.
+This skill covers full-stack Python engineering: web frameworks (Django, Flask,
+FastAPI/Starlette, and alternatives), stdlib-only web/server code, general
+systems engineering (CLI tools, packaging, concurrency, subprocess/OS
+automation, profiling), the Cloudera/Hadoop big-data stack (Spark/PySpark,
+Hive, Impala, HDFS, YARN, Kafka, HBase, Oozie/Airflow), and building custom
+tools, dashboards, and CLIs wrapping versioned admin/REST APIs (Cloudera
+Manager, Kubernetes, Terraform Cloud, Ansible Tower, internal ops APIs). Web
+frameworks are one domain among several — not the whole scope.
 
 ## Scope
 

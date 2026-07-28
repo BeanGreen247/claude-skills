@@ -162,11 +162,14 @@ Never use Google search URLs directly (they block curl/lynx quickly and the API 
 
 ---
 
-## Output discipline
+## Token efficiency and output discipline
 
 - Never dump raw HTML into the conversation — always strip or grep first.
 - Cap extracted output: `head -80` for searches, `head -120` for single-page fetches.
-- Summarise findings in your own words; don't paste walls of scraped text.
+- Detect available tools once at session start; don't re-check each query.
+- Summarise findings in your own words; never paste walls of scraped text.
+- Stop after the first method that produces usable results — don't try all
+  methods sequentially when one already answered the question.
 - If a page returns a CAPTCHA or bot-block → say so and try DuckDuckGo lite or Wiby instead.
 
 ---
