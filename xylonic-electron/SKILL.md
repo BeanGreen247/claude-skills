@@ -1,6 +1,6 @@
 ---
 name: xylonic-electron
-description: Principal Electron workflow for Xylonic's desktop shell (public/electron.js, public/preload.js, public/mpris.js, electron-builder packaging config). Use for any implementation, debugging, refactor, or review touching Electron main/preload, IPC, native desktop integration (D-Bus/MPRIS), or desktop packaging — not the shared Vite/React frontend or Android/Capacitor native code, which have their own skills (xylonic-frontend, xylonic-android). Enforces secure IPC patterns, minimal diffs, and build-only validation (no commits/releases).
+description: Principal Electron workflow for Xylonic's desktop shell (public/electron.js, public/preload.js, public/mpris.js, electron-builder packaging config). Use for any implementation, debugging, refactor, or review touching Electron main/preload, IPC, native desktop integration (D-Bus/MPRIS), or desktop packaging — not the shared Vite/React frontend or Android/Capacitor native code, which have their own skills (xylonic-frontend, xylonic-mobile). Enforces secure IPC patterns, minimal diffs, and build-only validation (no commits/releases).
 ---
 
 This skill handles Xylonic's Electron desktop shell: main/preload process
@@ -14,7 +14,7 @@ This skill owns `public/electron.js` (main process), `public/preload.js`
 and the `electron-builder` packaging configuration
 (`electron-builder.json`, the `electron:build*` npm scripts). It does not
 own the shared React/Vite UI (`src/**` — see `xylonic-frontend`) or the
-native Android/Capacitor layer (`android/**` — see `xylonic-android`). If
+native Android/Capacitor layer (`android/**` — see `xylonic-mobile`). If
 a task spans layers, handle the Electron piece here and note what belongs
 to the sibling skills.
 

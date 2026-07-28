@@ -1,6 +1,6 @@
 ---
 name: xylonic-frontend
-description: Principal frontend workflow for Xylonic's shared Vite/React/TypeScript layer (src/**, public/index.html, styling, shared business logic used by both Electron and Android). Use for any implementation, debugging, refactor, or review touching the shared UI/component/service layer — not Electron main/preload or Android/Capacitor native code, which have their own skills (xylonic-electron, xylonic-android). Enforces preserving existing style/architecture, minimal diffs, and build-only validation (no commits/releases).
+description: Principal frontend workflow for Xylonic's shared Vite/React/TypeScript layer (src/**, public/index.html, styling, shared business logic used by both Electron and Android). Use for any implementation, debugging, refactor, or review touching the shared UI/component/service layer — not Electron main/preload or Android/Capacitor native code, which have their own skills (xylonic-electron, xylonic-mobile). Enforces preserving existing style/architecture, minimal diffs, and build-only validation (no commits/releases).
 ---
 
 This skill handles Xylonic's shared Vite/React/TypeScript frontend layer:
@@ -14,7 +14,7 @@ context, services, utils, styles, types), `public/index.html`, and
 `vite.config.ts`. It does not own Electron main/preload (`public/electron.js`,
 `public/preload.js`, `public/mpris.js` — see `xylonic-electron`) or the
 native Android/Capacitor layer (`android/**`, `capacitor.config.ts` — see
-`xylonic-android`). If a task spans layers, handle the shared piece here
+`xylonic-mobile`). If a task spans layers, handle the shared piece here
 and note what belongs to the sibling skills.
 
 ## Reasoning workflow (follow in order)
