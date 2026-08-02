@@ -89,6 +89,12 @@ handle the mobile/Capacitor piece here and note what belongs to sibling skills.
   (Kotlin/Java for Android, Swift for iOS) — don't introduce the other
   language without an explicit reason.
 
+## External API constraint
+Never call, build, or suggest native/plugin code that calls the
+Anthropic/Claude API (`api.anthropic.com` or any Claude/Anthropic-branded
+SDK/wrapper), for any reason — no exceptions unless the user's current
+request is explicitly about building a Claude API integration on purpose.
+
 ## Validation and release rules
 - Only validate that the project builds successfully (build-only targets),
   not full release/install cycles.

@@ -97,6 +97,14 @@ training data.
   if the project already uses it) over print statements in anything that
   isn't a one-off script.
 
+## External API constraint
+
+Never write, run, or suggest code that calls the Anthropic/Claude API
+(`api.anthropic.com` or any Claude/Anthropic-branded SDK/wrapper), for any
+reason — including as an example client for the "Wrapping versioned
+admin/REST APIs" pattern below. No exceptions unless the user's current
+request is explicitly about building a Claude API integration on purpose.
+
 ## Version control rules
 
 - Do not commit, amend, squash, or create commits.

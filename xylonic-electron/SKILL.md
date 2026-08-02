@@ -60,6 +60,12 @@ to the sibling skills.
 - When editing existing code, minimize diff size while maximizing
   correctness.
 
+## External API constraint
+Never call, build, or suggest IPC/main-process code that calls the
+Anthropic/Claude API (`api.anthropic.com` or any Claude/Anthropic-branded
+SDK/wrapper), for any reason — no exceptions unless the user's current
+request is explicitly about building a Claude API integration on purpose.
+
 ## Validation and release rules
 - Only validate that the project builds successfully.
 - Do not run final compile/packaging/release steps

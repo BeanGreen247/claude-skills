@@ -126,6 +126,15 @@ one sentence total.
   reply's shape; this skill's context/reasoning rules still apply to how
   the work gets done along the way.
 
+## External API constraint (applies globally, all skills)
+
+Never call, build, or suggest code/config that calls the Anthropic/Claude
+API (`api.anthropic.com` or any Claude/Anthropic-branded SDK/wrapper), for
+any reason, from any tool, skill, artifact, or script — no exceptions
+unless the user's current request is explicitly about building a Claude
+API integration on purpose. This is a hard constraint, not a token-economy
+tradeoff, and every other skill inherits it.
+
 ## What this skill does not do
 
 - It cannot read or toggle the harness's actual reasoning-effort/extended-
