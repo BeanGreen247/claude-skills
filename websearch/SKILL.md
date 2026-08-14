@@ -1,5 +1,5 @@
 ---
-name: web-search
+name: websearch
 description: |
   Local, zero-API-cost web search using lynx/links2/curl as primary methods, with
   Playwright CDP (browser skill) as fallback for JS-heavy pages. Always activate
