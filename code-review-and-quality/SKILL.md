@@ -394,3 +394,14 @@ After review is complete:
 - [ ] Dependency upgrades were reviewed against their changelog, isolated per package, and verified by a green suite with the lockfile diff reviewed
 
 **Presumptive blockers:** surface and propose the simpler design for each of these; escalate to Required only when the change actively makes structure worse: a refactor that relocates complexity instead of reducing it; a change that pushes a file past the size boundary with no decomposition; feature logic added to a shared module; a near-duplicate of an existing canonical helper; a silent fallback that hides an unclear invariant.
+
+## Commit message formatting (standing rule)
+
+Commit messages are always a single line in conventional-commit format:
+`type(scope): message` (e.g. `feat(input.cpp): add launcher keybind`) -- never
+multi-line prose subject+body. No Co-Authored-By trailers unless asked.
+
+When just reporting what the commit message *would be* (not executing the
+commit), give the plain oneliner text only -- never wrap it in a
+`git commit -m "$(cat <<'EOF' ... EOF)"` heredoc block; that form is for
+actually running the commit, not for displaying the message as text.

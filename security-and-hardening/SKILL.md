@@ -465,3 +465,14 @@ After implementing security-relevant code:
 - [ ] Rate limiting active on auth endpoints
 - [ ] Server-side URL fetches validated against an allowlist (no SSRF)
 - [ ] LLM/model output validated and encoded before use (if AI features present)
+
+## Commit message formatting (standing rule)
+
+Commit messages are always a single line in conventional-commit format:
+`type(scope): message` (e.g. `feat(input.cpp): add launcher keybind`) -- never
+multi-line prose subject+body. No Co-Authored-By trailers unless asked.
+
+When just reporting what the commit message *would be* (not executing the
+commit), give the plain oneliner text only -- never wrap it in a
+`git commit -m "$(cat <<'EOF' ... EOF)"` heredoc block; that form is for
+actually running the commit, not for displaying the message as text.

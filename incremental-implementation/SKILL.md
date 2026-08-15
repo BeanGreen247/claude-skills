@@ -247,3 +247,14 @@ After completing all increments for a task:
 ## See Also
 
 Per-increment verification is the local check. Before declaring a task done, apply the project-wide Definition of Done as the final gate, the standing bar every increment clears regardless of the task. See `../../references/definition-of-done.md`.
+
+## Commit message formatting (standing rule)
+
+Commit messages are always a single line in conventional-commit format:
+`type(scope): message` (e.g. `feat(input.cpp): add launcher keybind`) -- never
+multi-line prose subject+body. No Co-Authored-By trailers unless asked.
+
+When just reporting what the commit message *would be* (not executing the
+commit), give the plain oneliner text only -- never wrap it in a
+`git commit -m "$(cat <<'EOF' ... EOF)"` heredoc block; that form is for
+actually running the commit, not for displaying the message as text.

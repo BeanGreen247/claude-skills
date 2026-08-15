@@ -353,3 +353,14 @@ For every release (anything with consumers):
 - [ ] The version bump matches the change: breaking → major, additive → minor, fix → patch
 - [ ] The release is tagged, and the version is derived from the tag, not hand-edited out of sync
 - [ ] The changelog has a curated, human-readable entry grouped by impact for this version
+
+## Commit message formatting (standing rule)
+
+Commit messages are always a single line in conventional-commit format:
+`type(scope): message` (e.g. `feat(input.cpp): add launcher keybind`) -- never
+multi-line prose subject+body. No Co-Authored-By trailers unless asked.
+
+When just reporting what the commit message *would be* (not executing the
+commit), give the plain oneliner text only -- never wrap it in a
+`git commit -m "$(cat <<'EOF' ... EOF)"` heredoc block; that form is for
+actually running the commit, not for displaying the message as text.

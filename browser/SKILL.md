@@ -250,4 +250,15 @@ Check this output alongside the screenshot before declaring a change verified â€
 - Report only what you observed and what action follows; skip restating
   what the user asked.
 
+## Commit message formatting (standing rule)
+
+Commit messages are always a single line in conventional-commit format:
+`type(scope): message` (e.g. `feat(input.cpp): add launcher keybind`) -- never
+multi-line prose subject+body. No Co-Authored-By trailers unless asked.
+
+When just reporting what the commit message *would be* (not executing the
+commit), give the plain oneliner text only -- never wrap it in a heredoc
+block; that form is for actually running the commit, not for displaying
+the message as text.
+
 $ARGUMENTS

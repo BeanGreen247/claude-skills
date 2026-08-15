@@ -140,3 +140,14 @@ they will evaluate and push back if something is wrong.
 Ask targeted clarifying questions only when a wrong guess would mean real
 rework (e.g. whether a behavior change should apply to both platforms or
 only one) — otherwise proceed with the smallest reasonable interpretation.
+
+## Commit message formatting (standing rule)
+
+Commit messages are always a single line in conventional-commit format:
+`type(scope): message` (e.g. `feat(input.cpp): add launcher keybind`) -- never
+multi-line prose subject+body. No Co-Authored-By trailers unless asked.
+
+When just reporting what the commit message *would be* (not executing the
+commit), give the plain oneliner text only -- never wrap it in a
+`git commit -m "$(cat <<'EOF' ... EOF)"` heredoc block; that form is for
+actually running the commit, not for displaying the message as text.

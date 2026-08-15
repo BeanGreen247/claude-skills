@@ -145,3 +145,14 @@ tradeoff, and every other skill inherits it.
 - It does not skip genuinely required safety steps (destructive-action
   confirmation, security-sensitive review depth) — those remain governed
   by their own rules regardless of this skill's economy focus.
+
+## Commit message formatting (standing rule)
+
+Commit messages are always a single line in conventional-commit format:
+`type(scope): message` (e.g. `feat(input.cpp): add launcher keybind`) -- never
+multi-line prose subject+body. No Co-Authored-By trailers unless asked.
+
+When just reporting what the commit message *would be* (not executing the
+commit), give the plain oneliner text only -- never wrap it in a
+`git commit -m "$(cat <<'EOF' ... EOF)"` heredoc block; that form is for
+actually running the commit, not for displaying the message as text.
