@@ -1,0 +1,46 @@
+# SkillSpector baseline for skill-safety-review itself.
+#
+# Hand-authored, drift-tolerant glob rules (survive line/wording edits) — do NOT
+# regenerate this file with `skillspector baseline`; scan-skills.sh --accept skips
+# this skill for that reason.
+#
+# This skill's SKILL.md documents how to scan skills, triage findings, and record
+# reviewed false positives in a baseline. That legitimately trips the analyzers
+# below. Every rule is scoped to this skill's own files.
+
+version: 2
+scanner_version: "2.11.0"
+
+rules:
+  - id: "AE1"
+    path: "*SKILL.md"
+    reason: "Doc explains triaging/suppressing scanner findings — not evasion of analysis"
+  - id: "SC2"
+    path: "*SKILL.md"
+    reason: "The only fetch is the documented `uv tool install` of SkillSpector itself"
+  - id: "SC*"
+    path: "*scan-skills.sh"
+    reason: "Wrapper installs SkillSpector via uv by design; no other network use"
+  - id: "TM*"
+    path: "*scan-skills.sh"
+    reason: "Wrapper orchestrates the skillspector CLI by design; not tool misuse"
+  - id: "RA*"
+    path: "*scan-skills.sh"
+    reason: "Wrapper writes per-skill baseline files by design; documented, reversible"
+  - id: "RA1"
+    path: "*SKILL.md"
+    reason: "Says the opposite — never edit a scanned skill; reports only"
+  - id: "RA2"
+    path: "*SKILL.md"
+    reason: "Describes SkillSpector's own scan lifecycle, no persistence mechanism"
+  - id: "LP3"
+    path: "*SKILL.md"
+    reason: "No MCP server or tool grants in this skill"
+  - id: "TM1"
+    path: "*SKILL.md"
+    reason: "Example skillspector CLI invocations, not tool-parameter abuse"
+  - id: "TM2"
+    path: "*SKILL.md"
+    reason: "Example skillspector CLI invocations in a fenced code block, not tool chaining"
+
+fingerprints: []

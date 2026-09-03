@@ -1,0 +1,33 @@
+# SkillSpector baseline — reviewed false positives, suppressed on future scans.
+# Regenerate with: skill-safety-review/scan-skills.sh --accept
+version: 2
+scanner_version: 2.11.0
+rules:
+# Hand-authored, drift-tolerant (fingerprints for these break on every edit and
+# skillspector cannot re-fingerprint a null-pattern finding). Scoped to this file.
+- id: "PE3"
+  path: "*SKILL.md"
+  reason: "Hardening guide teaching correct secret handling (.env / secrets manager); not credential exfiltration"
+- id: "SSRF1"
+  path: "*SKILL.md"
+  reason: "Names the cloud metadata endpoint to teach SSRF defense"
+- id: "YR4"
+  path: "*SKILL.md"
+  reason: "'Think like an attacker' threat-modeling prose, not embedded hidden instructions"
+fingerprints:
+- hash: sha256:f537d918bf41df885896d77cca4db7a4883922fd6e54459ce6ecd9a7ffc320bf
+  rule_id: YR4
+  file: SKILL.md
+  reason: Reviewed via skill-safety-review 20260903-215558
+- hash: sha256:e44b690670753f24696d3bc30dfc78e59f3c4dc6db480e166f7a169727842ff0
+  rule_id: SSRF1
+  file: SKILL.md
+  reason: Reviewed via skill-safety-review 20260903-215558
+- hash: sha256:3ff5fddd09f7b078034ef455c757038165e23f9d5cb76d81602aee4fec5fa394
+  rule_id: PE3
+  file: SKILL.md
+  reason: Reviewed via skill-safety-review 20260903-215558
+- hash: sha256:43d16cce454e63c10ef1cc94c823e76aa81127269a7117db7a24d10f20f892d7
+  rule_id: PE3
+  file: SKILL.md
+  reason: Reviewed via skill-safety-review 20260903-215558

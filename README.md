@@ -11,6 +11,7 @@ auto-invokes based on the description matching the current task.
 | [`token-economy`](token-economy) | Minimizes token spend across context, output, and reasoning-effort — active by default, no skip condition. |
 | [`silent-executor`](silent-executor) | Stricter output contract: work silently, reply only with a `FINISHED` block, no narration. |
 | [`no-unsolicited-opinions`](no-unsolicited-opinions) | Executes instructions as given instead of volunteering critique or alternative approaches — safety/clarification exceptions still apply. |
+| [`skill-safety-review`](skill-safety-review) | Security-scans agent skills with NVIDIA SkillSpector (static analysis only) before they are trusted or installed. |
 
 ## Software delivery lifecycle
 

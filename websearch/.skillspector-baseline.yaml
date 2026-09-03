@@ -1,0 +1,10 @@
+# SkillSpector baseline — reviewed false positives, suppressed on future scans.
+# Regenerate with: skill-safety-review/scan-skills.sh --accept
+version: 2
+scanner_version: 2.11.0
+rules: []
+fingerprints:
+- hash: sha256:ef11e3ada7ca9c56d28416bf9b467aab5ee74308b70664f70de870286b6d9f44
+  rule_id: PE2
+  file: SKILL.md
+  reason: Reviewed via skill-safety-review 20260903-215558
