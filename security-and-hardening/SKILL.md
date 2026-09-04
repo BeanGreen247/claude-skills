@@ -470,7 +470,7 @@ After implementing security-relevant code:
 
 Commit messages are always a single line in conventional-commit format:
 `type(scope): message` (e.g. `feat(input.cpp): add launcher keybind`) -- never
-multi-line prose subject+body. No Co-Authored-By trailers unless asked.
+multi-line prose subject+body. No Co-Authored-By trailers, Claude-Session links, or any other AI/Claude attribution lines or trailers -- ever, unless the user explicitly asks for one in that exact commit.
 
 When just reporting what the commit message *would be* (not executing the
 commit), give the plain oneliner text only -- never wrap it in a
