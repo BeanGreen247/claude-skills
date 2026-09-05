@@ -25,6 +25,7 @@ Curated from [addyosmani/agent-skills](https://github.com/addyosmani/agent-skill
 | [`test-driven-development`](test-driven-development) | Drives implementation and bug fixes with tests first. |
 | [`debugging-and-error-recovery`](debugging-and-error-recovery) | Systematic root-cause debugging instead of guessing. |
 | [`code-simplification`](code-simplification) | Refactors for clarity without changing behavior. |
+| [`module-extraction-verification`](module-extraction-verification) | Verifies a code extraction (splitting a monolith into modules/mixins) is complete and behavior-preserving — diff-then-lint before trusting it. |
 | [`code-review-and-quality`](code-review-and-quality) | Multi-axis review before a change merges. |
 | [`security-and-hardening`](security-and-hardening) | Hardens code that handles untrusted input, auth, or external integrations. |
 | [`performance-optimization`](performance-optimization) | Diagnoses and fixes performance regressions across the stack. |
