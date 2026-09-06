@@ -41,6 +41,7 @@ Curated from [addyosmani/agent-skills](https://github.com/addyosmani/agent-skill
 | [`python-engineer`](python-engineer) | Engineering rigor for Python web frameworks, systems tooling, and the Cloudera/Hadoop big-data stack. |
 | [`browser`](browser) | Drives the user's Chrome via Playwright CDP — navigation, screenshots, form-fill assist, live-reload watching. Originally from [Karel Mozdren](https://github.com/mozdren), modified here for Windows compatibility. |
 | [`websearch`](websearch) | Zero-API-cost web search via lynx/links2/curl, falling back to the `browser` skill for JS-heavy pages. |
+| [`design-craft`](design-craft) | Research-first UI/product/web design methodology + senior-designer craft references (type, color, motion, icons, copy, anti-AI-slop). MCP-free adaptation of [`referodesign/refero_skill`](https://github.com/referodesign/refero_skill) (MIT) — live research replaced by user references + the `websearch`/`browser` skills, no paid API. See [`design-craft/NOTICE.md`](design-craft/NOTICE.md). |
 
 ## Project: Xylonic
 
