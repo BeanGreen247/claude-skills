@@ -1,0 +1,21 @@
+# SkillSpector baseline — reviewed false positives, suppressed on future scans.
+# Regenerate with: skill-safety-review/scan-skills.sh --accept
+version: 2
+scanner_version: 2.11.0
+rules:
+# Hand-authored, drift-tolerant. RP1/RA1/RA2/E3 fire per-line on null patterns
+# across many reference files and cannot be re-fingerprinted reliably.
+# Reviewed 20260909 — all benign: markdown-only skill, no bundled scripts.
+- id: "RP1"
+  path: "*"
+  reason: "Hits on documented `npx -y firebase-tools@latest ...` CLI commands; npx-fetch heuristic, no MCP server"
+- id: "RA1"
+  path: "*"
+  reason: "'Self-modification' prose is about the Firebase CLI writing google-services.json / GoogleService-Info.plist config, not the agent rewriting itself"
+- id: "RA2"
+  path: "*"
+  reason: "'Session persistence' hits on lines that load sibling skills (`npx skills add`) — skill-management prose, not covert persistence"
+- id: "E3"
+  path: "*"
+  reason: "'File system enumeration' hits on `ls ~/.agents/skills` in the skill-refresh docs; benign listing"
+fingerprints: []

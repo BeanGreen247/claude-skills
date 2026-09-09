@@ -43,6 +43,27 @@ Curated from [addyosmani/agent-skills](https://github.com/addyosmani/agent-skill
 | [`websearch`](websearch) | Zero-API-cost web search via lynx/links2/curl, falling back to the `browser` skill for JS-heavy pages. |
 | [`design-craft`](design-craft) | Research-first UI/product/web design methodology + senior-designer craft references (type, color, motion, icons, copy, anti-AI-slop). MCP-free adaptation of [`referodesign/refero_skill`](https://github.com/referodesign/refero_skill) (MIT) — live research replaced by user references + the `websearch`/`browser` skills, no paid API. See [`design-craft/NOTICE.md`](design-craft/NOTICE.md). |
 
+## Google Cloud / Google products
+
+Curated from [google/skills](https://github.com/google/skills) (135 skills, mostly
+GCP/GKE/Ads/Analytics). Picked for overlap with this setup: Python/big-data
+(`python-engineer`), the Xylonic mobile/desktop app, and general AI-agent work.
+All nine passed [`skill-safety-review`](skill-safety-review) (SkillSpector static
+scan); surviving findings were reviewed as heuristic false positives and recorded
+in each skill's `.skillspector-baseline.yaml`.
+
+| Skill | Purpose |
+|---|---|
+| [`finding-google-skills`](finding-google-skills) | On-demand loader — fetches `google/skills`' catalog and pulls the right skill for any Google product/API not already vendored here (curl to public GitHub, no API key). |
+| [`gcloud`](gcloud) | Safety validation, guardrails, and output reduction for `gcloud` CLI operations across GCP. |
+| [`cloud-run-basics`](cloud-run-basics) | Deploy and manage Cloud Run services, jobs, and worker pools. |
+| [`firebase-basics`](firebase-basics) | Firebase CLI setup, login, project selection, and app config-file retrieval (`google-services.json`, `GoogleService-Info.plist`). References external `xcode-project-setup` / `genkit-ai/skills` that aren't vendored — degrades gracefully. |
+| [`bigquery-basics`](bigquery-basics) | Datasets, tables, jobs, SQL, and basic ingestion in BigQuery. |
+| [`developing-genkit-js`](developing-genkit-js) | Build AI flows/agents/tools with Genkit in Node.js/TypeScript. |
+| [`developing-genkit-python`](developing-genkit-python) | Build AI flows/agents/tools with Genkit in Python. |
+| [`managed-airflow-dag-authoring`](managed-airflow-dag-authoring) | Author and validate Airflow DAGs for Managed Service for Apache Airflow (Cloud Composer). |
+| [`managed-airflow-dag-troubleshooting`](managed-airflow-dag-troubleshooting) | Diagnose failed Managed Airflow DAG runs and task instances. |
+
 ## Project: Xylonic
 
 | Skill | Purpose |
