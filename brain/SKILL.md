@@ -49,13 +49,25 @@ A `PreToolUse` hook with **no matcher** (catches every tool call, from any
 session — command `brain_event.py`) logs each one to
 `~/.claude/brain/events.jsonl`: tool name, a short label (skill name for
 `Skill` calls; a description/filename for `Bash`/`Edit`/`Write`/`Read`/etc.),
-and the repo it fired in (`cwd` walked up to the nearest `.git` root). The
-page polls that file over `http://127.0.0.1:8765` (a `python3 -m http.server`
-bound to loopback, started on demand by `--open`) and lights up the real
-path — `repo -> skill -> NOW`, or `repo -> NOW` for a non-skill tool call —
-as a traveling wave (`firePathChain`), not just an isolated node blip. This
-is why whatever Claude is doing right now, in whichever repo, shows up live
-without needing to be a skill invocation.
+and the repo it fired in (`cwd` walked up to the nearest `.git` root).
+`events.jsonl` is capped at 200 lines — the page tracks the last-seen
+event's **timestamp**, not the line count, to detect new ones (a count
+comparison breaks permanently once the file fills to its cap, since the
+count then never changes again).
+
+Built-in tools (`Bash`, `Read`, `Edit`, etc.) get their own static nodes
+(`BUILTIN_TOOLS` in `brain_viz.py`), distinct cyan color, same as skills get
+skill nodes — so a plain tool call has something specific to land on, not
+just a bare repo pulse. The page polls `events.jsonl` over
+`http://127.0.0.1:8765` (a `python3 -m http.server` bound to loopback,
+started on demand by `--open`) and, for each new event, fires NOW's **real,
+already-on-screen epoch-ray edge** to the resolved skill/tool node and to
+the repo node independently (`fireEpochRay/fireLiveTargets`) — not a
+fabricated edge directly between them, since skill and repo nodes don't
+otherwise connect to each other and a made-up line looked disconnected from
+the graph's real synapse network. This is why whatever Claude is doing
+right now, in whichever repo, shows up live without needing to be a skill
+invocation.
 
 Firing is throttled to one animated burst per 500ms (`PATH_FIRE_THROTTLE_MS`)
 so a burst of rapid tool calls (many `Read`/`Edit` in a row) reads as one
@@ -65,12 +77,38 @@ shows when the live feed is connected. The page is served over localhost
 rather than opened as a bare `file://` page because browsers block `fetch`
 of local files from `file://`.
 
+Ambient (idle, non-live) fires happen every 2.5s and pick a random
+non-epoch node — since every node's edge set includes its own epoch ray,
+these almost always include a pulse toward NOW too, which is not itself
+meaningful; the event log (bottom-right, above the node count) labels these
+`idle animation, not real activity` to distinguish them from genuine `live`
+task events.
+
 ## Rendering notes
 
-- Window resize is debounced 300ms (a live drag-resize fires `resize` every
-  pixel; reallocating the canvas backing store on each one tanks FPS), and
-  the view auto-fits pan/zoom to the current node layout once the resize
-  settles (`fitToScreen`).
+- Resize detection does **not** trust `window.innerWidth`/`resize`/
+  `ResizeObserver` — in the Brave app-mode fallback, none of those update
+  for a window-manager-driven resize (confirmed by testing this exact
+  window, not just in isolation). The canvas checks its own
+  `getBoundingClientRect()` every animation frame instead, which stays
+  correct regardless of how the resize happened; changes are still
+  debounced 300ms before reallocating the canvas backing store, and the
+  view auto-fits pan/zoom to the current node layout once the resize
+  settles (`fitToScreen`) — including one guaranteed fit ~2.3s after load
+  even if no resize is ever detected, since a window that's opened and
+  never touched again otherwise never gets fit to its actual size (the
+  physics constants are fixed absolute pixels, not relative to window
+  size).
+- In the **native pywebview window**, a window-manager-driven resize
+  updates the outer GTK window correctly but WebKit2GTK's internal
+  viewport doesn't reliably re-measure to match (nodes render as ovals,
+  not circles) — `window.events.resized` never fires for that resize path,
+  and calling `window.resize()` back with the current size is treated as a
+  no-op. `brain_window.py` polls `window.width`/`height` (which do query
+  the GTK backend live) and, once a new size has held for two consecutive
+  polls (~1s, to avoid a reload storm during an active drag), forces a
+  genuine `window.load_url()` reload — that's the one thing that actually
+  makes WebKit re-lay-out against the real current size.
 - Every node gets a faint permanent glow via a pre-rendered per-color sprite
   blitted with `drawImage` (`glowSpriteFor`) — cheap at 210 nodes/60fps,
   unlike a live gradient or `shadowBlur` per node per frame.
