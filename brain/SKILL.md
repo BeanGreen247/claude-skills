@@ -1,6 +1,6 @@
 ---
 name: brain
-description: Regenerates and opens the Claude memory "brain" visualization — a lightweight local graph of local memory, the claude-memory-bank, skills, and git project repos under $HOME, with a live view of skills firing as they're used. Use when the user asks to see, open, or refresh their memory graph/brain visualization.
+description: Regenerates and opens the Claude memory "brain" visualization — a lightweight local graph of local memory, the claude-memory-bank, skills, and git project repos under $HOME, with a live view of the actual task in progress (repo -> skill/tool -> NOW) across any session, as it happens. Use when the user asks to see, open, or refresh their memory graph/brain visualization.
 ---
 
 Source: [github.com/BeanGreen247/claude-memory-brain](https://github.com/BeanGreen247/claude-memory-brain)
@@ -43,15 +43,44 @@ data is usually already fresh — `--open` just needs to launch the window.
    banner that can't be suppressed via flags. Last resort only.
 5. `webbrowser.open()` as the final fallback.
 
-## Live skill-fire reactions
+## Live task reactions
 
-A `PreToolUse` hook (matcher: `Skill`, command `brain_event.py`) logs every skill
-invocation to `~/.claude/brain/events.jsonl`. The page polls that file over
-`http://127.0.0.1:8765` (a `python3 -m http.server` bound to loopback, started
-on demand by `--open`) and fires that skill's node live — a small green dot
-bottom-right shows when the live feed is connected. This is why the page is
-served over localhost rather than opened as a bare `file://` — browsers block
-`fetch` of local files from a `file://` page.
+A `PreToolUse` hook with **no matcher** (catches every tool call, from any
+session — command `brain_event.py`) logs each one to
+`~/.claude/brain/events.jsonl`: tool name, a short label (skill name for
+`Skill` calls; a description/filename for `Bash`/`Edit`/`Write`/`Read`/etc.),
+and the repo it fired in (`cwd` walked up to the nearest `.git` root). The
+page polls that file over `http://127.0.0.1:8765` (a `python3 -m http.server`
+bound to loopback, started on demand by `--open`) and lights up the real
+path — `repo -> skill -> NOW`, or `repo -> NOW` for a non-skill tool call —
+as a traveling wave (`firePathChain`), not just an isolated node blip. This
+is why whatever Claude is doing right now, in whichever repo, shows up live
+without needing to be a skill invocation.
+
+Firing is throttled to one animated burst per 500ms (`PATH_FIRE_THROTTLE_MS`)
+so a burst of rapid tool calls (many `Read`/`Edit` in a row) reads as one
+steady glow instead of a strobe; the HUD status label still updates on every
+event even when the burst itself is skipped. A small green dot bottom-right
+shows when the live feed is connected. The page is served over localhost
+rather than opened as a bare `file://` page because browsers block `fetch`
+of local files from `file://`.
+
+## Rendering notes
+
+- Window resize is debounced 300ms (a live drag-resize fires `resize` every
+  pixel; reallocating the canvas backing store on each one tanks FPS), and
+  the view auto-fits pan/zoom to the current node layout once the resize
+  settles (`fitToScreen`).
+- Every node gets a faint permanent glow via a pre-rendered per-color sprite
+  blitted with `drawImage` (`glowSpriteFor`) — cheap at 210 nodes/60fps,
+  unlike a live gradient or `shadowBlur` per node per frame.
+- Idle synapse (edge) opacity is intentionally higher than a typical
+  force-graph default (0.22 regular / 0.12 epoch rays) so the connections
+  are readable without hovering.
+- The physics repulsion force floors at `d2 = 4` (not `0` or a near-zero
+  epsilon) and per-frame node speed is clamped to 14px — random launch
+  positions landing close together no longer spike the repulsion force and
+  teleport nodes across the screen on the first few frames.
 
 ## Known gotchas (already hit and fixed once — don't reintroduce)
 
