@@ -3,6 +3,12 @@ name: brain
 description: Regenerates and opens the Claude memory "brain" visualization — a lightweight local graph of local memory, the claude-memory-bank, skills, and git project repos under $HOME, with a live view of skills firing as they're used. Use when the user asks to see, open, or refresh their memory graph/brain visualization.
 ---
 
+Source: [github.com/BeanGreen247/claude-memory-brain](https://github.com/BeanGreen247/claude-memory-brain)
+(local clone: `~/git/claude-memory-brain`). `~/.claude/scripts/brain_*.py` and
+`install-brain-deps.sh` are symlinks into that repo — edit the files there,
+not through the symlinks, so changes are actually version-controlled. Full
+architecture/gotchas writeup: that repo's `README.md`.
+
 Run this, then tell the user it opened (name the path):
 
 ```
